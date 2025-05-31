@@ -1,0 +1,230 @@
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background: linear-gradient(135deg, #00041f 0%, #000736 100%);
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+    color: #fff;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #ffbf00;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #b3b3b3;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #242424;
+    color: #fff;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 20px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.search-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.search-input {
+    flex: 1;
+}
+
+.filter-group {
+    width: 200px;
+}
+
+.error-message {
+    color: #ff4444;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(255, 68, 68, 0.1);
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.no-results {
+    color: #b3b3b3;
+    padding: 10px;
+    text-align: center;
+    font-style: italic;
+}
+
+#genreFilter {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #242424;
+    color: #fff;
+    height: auto;
+    min-height: 100px;
+}
+
+#genreFilter option {
+    padding: 8px;
+    margin: 2px 0;
+    border-radius: 2px;
+}
+
+#genreFilter option:checked {
+    background-color: #ffbf00;
+    color: #000;
+}
+
+.songs-list {
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #121212;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+
+.song-item:hover {
+    background-color: #282828;
+}
+
+.song-item.selected {
+    background-color: #1a1a1a;
+}
+
+.song-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 4px;
+}
+
+.song-info {
+    flex: 1;
+}
+
+.song-title {
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.song-artist {
+    color: #b3b3b3;
+    font-size: 0.9em;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-create,
+.btn-cancel {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-create {
+    background-color: #ffbf00;
+    color: #000;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 1px solid #b3b3b3;
+    color: #b3b3b3;
+}
+
+.btn-create:hover {
+    background-color: #ffd700;
+}
+
+.btn-cancel:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+.cover-preview {
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+    background-color: #242424;
+    border-radius: 4px;
+    overflow: hidden;
+    display: none;
+}
+
+.cover-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} 

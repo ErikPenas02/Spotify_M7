@@ -1,0 +1,111 @@
+.playlist-sidebar {
+    background-color: #121212; /* Fondo oscuro similar */
+    width: 300px; /* Ancho de la barra lateral */
+    padding: 16px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 10px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.create-playlist-btn {
+    background-color: transparent;
+    border: none;
+    color: #b3b3b3; /* Color similar al + de Spotify */
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: color 0.2s ease;
+}
+
+.create-playlist-btn:hover {
+    color: #fff; /* Blanco al pasar el ratón */
+}
+
+.playlist-filters {
+    /* Estilos para el contenedor de filtros */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.playlist-search input {
+    width: calc(100% - 20px); /* Ancho con padding */
+    padding: 8px 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: #242424;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.playlist-search input::placeholder {
+    color: #b3b3b3;
+}
+
+.filter-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #b3b3b3;
+}
+
+.filter-options select, .filter-options input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.filter-options select {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    background-color: #242424;
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.playlist-list {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    overflow-y: auto; /* Scroll si hay muchas playlists */
+    padding-right: 8px; /* Espacio para la barra de scroll */
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.playlist-item:hover {
+    background-color: #282828; /* Fondo al pasar el ratón */
+}
+
+.playlist-cover {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    object-fit: cover;
+    border-radius: 4px; /* Bordes un poco redondeados para las portadas */
+}
+
+.playlist-name {
+    font-size: 1rem;
+}
