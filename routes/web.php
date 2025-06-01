@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListsController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('login');
@@ -29,3 +30,33 @@ Route::post('/api/playlists', [PlaylistController::class, 'store'])->name('playl
 
 // Nueva ruta API para la búsqueda global
 Route::post('/api/search', [HomeController::class, 'search'])->name('api.search');
+
+
+Route::middleware(['auth', 'isAdmin'])->prefix('dashboard')->name('dashboard.')->group(function () {
+
+    /** ---------- VISTAS ---------- **/
+
+    // Álbumes
+    Route::get('/albumes', [AdminController::class, 'indexAlbumes'])->name('albumes.index');
+    Route::get('/albumes/crear', [AdminController::class, 'crearAlbum'])->name('albumes.create');
+    Route::get('/albumes/{id}/editar', [AdminController::class, 'editarAlbum'])->name('albumes.edit');
+
+    // Canciones
+    Route::get('/canciones', [AdminController::class, 'indexCanciones'])->name('canciones.index');
+    Route::get('/canciones/crear', [AdminController::class, 'crearCancion'])->name('canciones.create');
+    Route::get('/canciones/{id}/editar', [AdminController::class, 'editarCancion'])->name('canciones.edit');
+
+    /** ---------- API (AJAX con fetch) ---------- **/
+
+    // Álbumes
+    Route::get('/api/albumes', [AdminController::class, 'fetchAlbumes'])->name('albumes.fetch');
+    Route::post('/api/albumes', [AdminController::class, 'guardarAlbum'])->name('albumes.store');
+    Route::put('/api/albumes/{id}', [AdminController::class, 'actualizarAlbum'])->name('albumes.update');
+    Route::delete('/api/albumes/{id}', [AdminController::class, 'eliminarAlbum'])->name('albumes.destroy');
+
+    // Canciones
+    Route::get('/api/canciones', [AdminController::class, 'fetchCanciones'])->name('canciones.fetch');
+    Route::post('/api/canciones', [AdminController::class, 'guardarCancion'])->name('canciones.store');
+    Route::put('/api/canciones/{id}', [AdminController::class, 'actualizarCancion'])->name('canciones.update');
+    Route::delete('/api/canciones/{id}', [AdminController::class, 'eliminarCancion'])->name('canciones.destroy');
+});
