@@ -6,8 +6,10 @@
 <div class="container mt-4">
     <h1>Crear Nueva Canción</h1>
 
-    <form action="{{ route('dashboard.canciones.store') }}" method="POST">
+    <form id="formCrearCancion" action="{{ route('dashboard.canciones.store') }}" method="POST" data-redirect="{{ route('dashboard.canciones.index') }}">
         @csrf
+
+        <div id="errores" class="mb-3 text-danger"></div> <!-- Aquí mostramos errores -->
 
         <div class="mb-3">
             <label for="titulo_cancion" class="form-label">Título</label>
@@ -65,4 +67,8 @@
         <a href="{{ route('dashboard.canciones.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/canciones/crear.js') }}"></script>
 @endsection

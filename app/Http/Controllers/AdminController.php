@@ -108,32 +108,24 @@ class AdminController extends Controller
 
 
     public function guardarCancion(Request $request)
-    {
-        $request->validate([
-            'titulo_cancion' => 'required|string|max:255',
-            'duracion' => 'required|string|max:10',
-            'id_album' => 'required|exists:albums,id_album',
-            'artistas_colaboradores' => 'nullable|array',
-            'artistas_colaboradores.*' => 'exists:artistas,id_artista',
-            'generos' => 'nullable|array',
-            'generos.*' => 'exists:generos,id_gen',
-            'nuevo_artista' => 'nullable|string|max:255',
-        ]);
+{
+    $validated = $request->validate([
+        'titulo_cancion' => 'required|string|max:255',
+        'duracion' => 'required',
+        'id_album' => 'required|exists:albums,id_album',
+        // demás validaciones...
+    ]);
 
-        $cancion = Cancion::create($request->only('titulo_cancion', 'duracion', 'id_album'));
+    // Crear canción...
+    $cancion = Cancion::create($validated);
 
-        $artistasIds = $request->input('artistas_colaboradores', []);
+    // Puedes devolver:
+    return response()->json([
+        'success' => true,
+        'cancion' => $cancion
+    ]);
+}
 
-        if ($request->filled('nuevo_artista')) {
-            $nuevoArtista = Artista::firstOrCreate(['n_artista' => $request->nuevo_artista]);
-            $artistasIds[] = $nuevoArtista->id_artista;
-        }
-
-        $cancion->artistasColaboradores()->sync($artistasIds);
-        $cancion->generos()->sync($request->input('generos', []));
-
-        return response()->json(['success' => true, 'message' => 'Canción creada correctamente.']);
-    }
 
     public function actualizarCancion(Request $request, $id)
     {
