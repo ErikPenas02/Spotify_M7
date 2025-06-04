@@ -26,15 +26,20 @@ class AdminController extends Controller
         return view('admin.canciones.create', compact('albumes', 'artistas', 'generos'));
     }
 
-    public function editarCancion($id)
-    {
-        $cancion = Cancion::with(['artistasColaboradores', 'generos'])->findOrFail($id);
-        $albumes = Album::with('artista')->get();
-        $artistas = Artista::all();
-        $generos = Genero::all();
+public function editarCancion($id)
+{
+    $cancion = Cancion::with(['artistas_colaboradores', 'generos'])->findOrFail($id);
+    $albumes = Album::with('artista')->get();
+    $artistas = Artista::all();
+    $generos = Genero::all();
 
-        return view('admin.canciones.edit', compact('cancion', 'albumes', 'artistas', 'generos'));
-    }
+    // Para facilitar la selección multiple en la vista:
+    $cancion->artistas_colaboradores_ids = $cancion->artistas_colaboradores->pluck('id_artista')->toArray();
+    $cancion->generos_ids = $cancion->generos->pluck('id_gen')->toArray();
+
+    return view('dashboard.canciones.editar', compact('cancion', 'albumes', 'artistas', 'generos'));
+}
+
 
     public function indexAlbumes()
     {

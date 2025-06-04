@@ -6,9 +6,14 @@
 <div class="container mt-4">
     <h1>Editar Canción</h1>
 
-    <form action="{{ route('dashboard.canciones.update', $cancion->id_cancion) }}" method="POST">
+    <form id="formEditarCancion" 
+          action="{{ route('dashboard.canciones.update', $cancion->id_cancion) }}" 
+          method="POST" 
+          data-redirect="{{ route('dashboard.canciones.index') }}">
         @csrf
         @method('PUT')
+
+        <div id="errores" class="mb-3 text-danger"></div> <!-- Aquí mostramos errores -->
 
         <div class="mb-3">
             <label for="titulo_cancion" class="form-label">Título</label>
@@ -17,7 +22,7 @@
 
         <div class="mb-3">
             <label for="duracion" class="form-label">Duración</label>
-            <input type="text" name="duracion" id="duracion" class="form-control" value="{{ old('duracion', $cancion->duracion) }}" required>
+            <input type="text" name="duracion" id="duracion" class="form-control" value="{{ old('duracion', $cancion->duracion) }}" required placeholder="Ej: 03:30">
         </div>
 
         <div class="mb-3">
@@ -25,7 +30,8 @@
             <select name="id_album" id="id_album" class="form-select" required>
                 <option value="">-- Selecciona un álbum --</option>
                 @foreach($albumes as $album)
-                    <option value="{{ $album->id_album }}" {{ old('id_album', $cancion->id_album) == $album->id_album ? 'selected' : '' }}>
+                    <option value="{{ $album->id_album }}" 
+                        {{ (old('id_album', $cancion->id_album) == $album->id_album) ? 'selected' : '' }}>
                         {{ $album->titulo_album }} ({{ $album->artista->n_artista ?? 'Sin artista' }})
                     </option>
                 @endforeach
@@ -37,7 +43,7 @@
             <select name="artistas_colaboradores[]" id="artistas_colaboradores" class="form-select" multiple>
                 @foreach($artistas as $artista)
                     <option value="{{ $artista->id_artista }}"
-                        {{ in_array($artista->id_artista, old('artistas_colaboradores', $cancion->artistas->pluck('id_artista')->toArray())) ? 'selected' : '' }}>
+                        {{ (collect(old('artistas_colaboradores', $cancion->artistas_colaboradores_ids))->contains($artista->id_artista)) ? 'selected' : '' }}>
                         {{ $artista->n_artista }}
                     </option>
                 @endforeach
@@ -56,7 +62,7 @@
             <select name="generos[]" id="generos" class="form-select" multiple>
                 @foreach($generos as $genero)
                     <option value="{{ $genero->id_gen }}"
-                        {{ in_array($genero->id_gen, old('generos', $cancion->generos->pluck('id_gen')->toArray())) ? 'selected' : '' }}>
+                        {{ (collect(old('generos', $cancion->generos_ids))->contains($genero->id_gen)) ? 'selected' : '' }}>
                         {{ $genero->n_genero }}
                     </option>
                 @endforeach
@@ -64,8 +70,12 @@
             <small class="form-text text-muted">Mantén Ctrl/Cmd para seleccionar varios.</small>
         </div>
 
-        <button type="submit" class="btn btn-primary">Actualizar Canción</button>
+        <button type="submit" class="btn btn-success">Actualizar Canción</button>
         <a href="{{ route('dashboard.canciones.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/canciones/editar.js') }}"></script>
 @endsection
